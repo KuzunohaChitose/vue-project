@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { useCounterStore } from "@/stores/counter.ts";
 
-const data = reactive({
-    count: 0,
-});
+const counterStore = useCounterStore();
 </script>
 
 <template>
     <ALayout class="root">
-        <ALayoutHeader class="header">Header</ALayoutHeader>
+        <ALayoutHeader class="header">
+            <h1>Count is: {{ counterStore.count }}</h1>
+        </ALayoutHeader>
         <ALayoutContent class="content">
-            <ATypography>Count is: {{ data.count }}</ATypography>
-            <AButton @click="() => data.count++">Click!</AButton>
+            <RouterView></RouterView>
         </ALayoutContent>
         <ALayoutFooter class="footer">Footer</ALayoutFooter>
     </ALayout>
@@ -19,7 +18,19 @@ const data = reactive({
 
 <style lang="scss" scoped>
 .root {
+    width: 100%;
+    height: 100%;
+
+    .header {
+        text-align: center;
+        color: white;
+    }
+
     .content {
+        text-align: center;
+    }
+
+    .footer {
         text-align: center;
     }
 }
